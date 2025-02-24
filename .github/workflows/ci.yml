@@ -18,19 +18,19 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Chrome
-        run: |
-          sudo apt update
-          sudo apt install -y google-chrome-stable
+      - name: Get Chrome Version
+        id: chrome_version
+        run: echo "VERSION=$(google-chrome --version | awk '{print $3}' | cut -d'.' -f1)" >> $GITHUB_ENV
 
-      - name: Install ChromeDriver
+      - name: Install Matching ChromeDriver
         run: |
           sudo apt update
           sudo apt install -y wget unzip
-          wget -q "https://storage.googleapis.com/chrome-for-testing-public/120.0.6099.71/linux64/chromedriver-linux64.zip"
+          wget -q "https://storage.googleapis.com/chrome-for-testing-public/${{ env.VERSION }}/linux64/chromedriver-linux64.zip"
           unzip chromedriver-linux64.zip
           sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
           chmod +x /usr/local/bin/chromedriver
+
 
 
       - name: Install Dependencies
