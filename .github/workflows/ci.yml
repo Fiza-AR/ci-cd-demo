@@ -44,4 +44,4 @@ jobs:
           chromedriver --version
 
       - name: Run Tests
-        run: python test_app.py
+        run: python tests/test_login.py
