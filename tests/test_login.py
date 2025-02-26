@@ -1,25 +1,20 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
-# Set ChromeDriver path
-chrome_driver_path = r"C:\Users\HP\ci-cd-demo\drivers\chromedriver.exe"
-
-# Set up Chrome options
 chrome_options = Options()
-# Comment out headless mode if you want to see the browser
-# chrome_options.add_argument("--headless")
+chrome_options.add_argument("--headless")  # Run without UI
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
 
-# Start WebDriver
-service = Service(chrome_driver_path)
+# Use ChromeDriver without specifying a path
+service = Service()  
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
-# Open login page
 driver.get("https://the-internet.herokuapp.com/login")
+
+# Perform login test...
+
 
 # Wait until username field is present
 wait = WebDriverWait(driver, 10)

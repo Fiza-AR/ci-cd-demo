@@ -27,7 +27,8 @@ jobs:
           python -m venv venv
           & venv\Scripts\Activate
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          if (Test-Path "requirements.txt") { pip install -r requirements.txt } else { Write-Host "No requirements.txt found, skipping dependencies installation." }
+
 
       - name: Run Selenium test
         shell: powershell
