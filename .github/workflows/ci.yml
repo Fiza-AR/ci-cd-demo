@@ -22,18 +22,15 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
+        shell: powershell
         run: |
           python -m venv venv
-          venv\Scripts\activate
+          & venv\Scripts\Activate
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          
-      - name: Download ChromeDriver
-        run: |
-          choco install googlechrome chromedriver -y
-        shell: powershell
 
       - name: Run Selenium test
+        shell: powershell
         run: |
-          venv\Scripts\activate
+          & venv\Scripts\Activate
           python tests/test_login.py
